@@ -10,5 +10,7 @@ do
     ln -s $f ~
 done
 
+vim +PluginInstall +qa
+
 echo "Install complete."
 
