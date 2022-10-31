@@ -9,12 +9,18 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'dense-analysis/ale'
-Plugin 'nvie/vim-flake8'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'preservim/nerdtree'
-Plugin 'jalvesaq/Nvim-R'
+
+Plugin 'dense-analysis/ale'        " 
+Plugin 'nvie/vim-flake8'           " PEP8 style guides (links to Flake)
+Plugin 'davidhalter/jedi-vim'      " 
+Plugin 'morhetz/gruvbox'           " Colorscheme
+Plugin 'preservim/nerdtree'        " File browser
+
+Plugin 'preservim/vimux'           " Interact with tmux
+Plugin 'greghor/vim-pyShell'       " Improved interactivity with ipython
+Plugin 'julienr/vim-cellmode'      " Block execution
+
+Plugin 'jalvesaq/Nvim-R'           " R-interactive session
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -38,11 +44,21 @@ colorscheme gruvbox
 set bg=dark
 set foldmethod=indent
 set foldlevel=99
+
 nnoremap <space> za
 imap <F5> <Esc><F5>
 nmap <F5> :w<CR>:!clear;python %<CR>
 imap § <C-x><C-o>
-nmap ± :NERDTree<CR><C-w>l
+
+" ipython-shell
+noremap ,ss :call StartPyShell()<CR>
+noremap ,sk :call StopPyShell()<CR>
+
+" code execution
+nnoremap ,l :call PyShellSendLine()<CR><CR>
+noremap <silent> <C-n> :call RunTmuxPythonCell(0)<CR>
+noremap <C-a> :call RunTmuxPythonAllCellsAbove()<CR>
+
 let g:ale_linters = {'python': ['flake8']}
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_tabs_not_buffers = 1
@@ -56,16 +72,10 @@ au BufNewFile, BufRead *.py
     \ set autoindent
     \ set fileformat=unix
 
-match ErrorMsg '\%>80v.\+'
-set number
+"match ErrorMsg '\%>80v.\+'
+set number " set number relativenumber, for relative line numbers
 set colorcolumn=80
 
-" Start NERDTree when Vim is started without file arguments.
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-
-" Start NERDTree and put the cursor back in the other window.
-"autocmd VimEnter * NERDTree | wincmd p
-
 " Exit Vim if NERDTree is the only window remaining in the only tab.
+nmap ± :NERDTree<CR><C-w>l
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
