@@ -1,0 +1,14 @@
+#!/bin/bash
+
+for f in ~/dotfiles/.*
+do
+    base=$(basename "$f")
+    if [ "$base" == "." ] || [ "$base" == ".." ] || [ "$base" == ".git" ] ; then
+        continue;
+    fi
+
+    unlink ~/$base
+done
+
+echo "Uninstall complete."
+
