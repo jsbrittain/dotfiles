@@ -1,15 +1,36 @@
 #!/bin/bash
 
+# Create symbolic links to .files in home folder
 for f in ~/dotfiles/.*
 do
     base=$(basename "$f")
     if [ "$base" == "." ] || [ "$base" == ".." ] || [ "$base" == ".git" ] ; then
         continue;
     fi
-
     ln -s $f ~
 done
 
+# Check for vundle (vim package manager) and install if not present
+if [ ! -d "~/.vim/bundle/Vundle.vim" ]
+then
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+
+# Check for vim and (attempt) to install if not
+if ! command -v vim &> /dev/null
+then
+    echo " === vim not found ==="
+    sudo apt install vim
+fi
+
+# Check for tmux and (attempt) to install if not
+if ! command -v tmux &> /dev/null
+then
+    echo " === tmux not found ==="
+    sudo apt install tmux
+fi
+
+# Install vim plugins
 vim +PluginInstall +qa
 
 echo "Install complete."
