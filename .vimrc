@@ -18,7 +18,7 @@ Plugin 'preservim/nerdtree'        " File browser
 
 Plugin 'preservim/vimux'           " Interact with tmux
 Plugin 'greghor/vim-pyShell'       " Improved interactivity with ipython
-Plugin 'julienr/vim-cellmode'      " Block execution
+" Plugin 'julienr/vim-cellmode'      " Block execution (requires non-PEP8 compliant tags)
 
 Plugin 'jalvesaq/Nvim-R'           " R-interactive session
 
