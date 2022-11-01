@@ -63,6 +63,10 @@ let g:ale_linters = {'python': ['flake8']}
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_tabs_not_buffers = 1
 
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
 au BufNewFile, BufRead *.py
     \ set tabstop=4
     \ set softtabstop=4
