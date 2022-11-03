@@ -16,11 +16,9 @@ Plugin 'davidhalter/jedi-vim'      "
 Plugin 'morhetz/gruvbox'           " Colorscheme
 Plugin 'preservim/nerdtree'        " File browser
 
-Plugin 'preservim/vimux'           " Interact with tmux
-Plugin 'greghor/vim-pyShell'       " Improved interactivity with ipython
-" Plugin 'julienr/vim-cellmode'      " Block execution (requires non-PEP8 compliant tags)
+Plugin 'jpalardy/vim-slime'        " Send commands using tmux [configured below] by <C-c><C-c>
 
-Plugin 'jalvesaq/Nvim-R'           " R-interactive session
+Plugin 'jalvesaq/Nvim-R'           " R-interactive session (.R files only)
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,16 +50,12 @@ imap § <C-x><C-o>
 
 " ipython-shell
 noremap ,ss :call StartPyShell()<CR>
-noremap ,sk :call StopPyShell()<CR>
-
-" code execution
-nnoremap ,l :call PyShellSendLine()<CR><CR>
-noremap <silent> <C-n> :call RunTmuxPythonCell(0)<CR>
-noremap <C-a> :call RunTmuxPythonAllCellsAbove()<CR>
+" noremap ,sk :call StopPyShell()<CR>
 
 let g:ale_linters = {'python': ['flake8']}
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_tabs_not_buffers = 1
+let g:slime_target = "tmux"
 
 set tabstop=4
 set softtabstop=4
