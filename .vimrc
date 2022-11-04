@@ -13,11 +13,11 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'dense-analysis/ale'        " 
 Plugin 'nvie/vim-flake8'           " PEP8 style guides (links to Flake)
 Plugin 'davidhalter/jedi-vim'      " 
+Plugin 'airblade/vim-gitgutter'    " Track git changes
+
 Plugin 'morhetz/gruvbox'           " Colorscheme
 Plugin 'preservim/nerdtree'        " File browser
-
 Plugin 'jpalardy/vim-slime'        " Send commands using tmux [configured below] by <C-c><C-c>
-
 Plugin 'jalvesaq/Nvim-R'           " R-interactive session (.R files only)
 
 " All of your Plugins must be added before the following line
@@ -47,10 +47,6 @@ nnoremap <space> za
 imap <F5> <Esc><F5>
 nmap <F5> :w<CR>:!clear;python %<CR>
 imap § <C-x><C-o>
-
-" ipython-shell
-noremap ,ss :call StartPyShell()<CR>
-" noremap ,sk :call StopPyShell()<CR>
 
 let g:ale_linters = {'python': ['flake8']}
 let g:jedi#popup_on_dot = 0
