@@ -42,16 +42,30 @@ colorscheme gruvbox
 set bg=dark
 set foldmethod=indent
 set foldlevel=99
+set updatetime=100
 
-nnoremap <space> za
 imap <F5> <Esc><F5>
 nmap <F5> :w<CR>:!clear;python %<CR>
 imap § <C-x><C-o>
 
+set <A-CR>= " To type this in insert mode: <C-V><Alt-<something>> <C-V><M>
+vmap <A-CR> <Plug>SlimeRegionSend<Esc>`><Down>
+nmap <A-CR> <s-v><Plug>SlimeRegionSend<Esc><Esc><Down>
+imap <A-CR> <Esc><Esc><s-v><Plug>SlimeRegionSend<Esc><Esc><Down>i
+
 let g:ale_linters = {'python': ['flake8']}
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#show_call_signatures = "2"
 let g:slime_target = "tmux"
+
+let g:slime_dont_ask_default = 1
+let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
+
+" Remove underscore for assignment (<-), replace with Alt- (like RStudio)
+let R_assign = 0
+imap - <-<Space>
+imap m %>%<Space>
 
 set tabstop=4
 set softtabstop=4
