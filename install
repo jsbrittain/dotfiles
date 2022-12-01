@@ -1,10 +1,14 @@
 #!/bin/bash
 
+# Hide dotfiles folder (needs to be done first or links break)
+cd ~
+mv ~/dotfiles ~/.dotfiles
+
 # Create symbolic links to .files in home folder
-for f in ~/dotfiles/.*
+for f in ~/.dotfiles/.*
 do
     base=$(basename "$f")
-    if [ "$base" == "." ] || [ "$base" == ".." ] || [ "$base" == ".git" ] ; then
+    if [ "$base" == "." ] || [ "$base" == ".." ] || [ "$base" == ".git" ] || [ "$base" == ".gitignore" ]; then
         continue;
     fi
     ln -s $f ~
@@ -13,25 +17,26 @@ done
 # Check for vundle (vim package manager) and install if not present
 if [ ! -d "~/.vim/bundle/Vundle.vim" ]
 then
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    echo "Cloning vundle package manager..."
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
-# Check for vim and (attempt) to install if not
+# Check for vim
 if ! command -v vim &> /dev/null
 then
     echo " === vim not found ==="
-    sudo apt install vim
 fi
 
-# Check for tmux and (attempt) to install if not
+# Check for tmux
 if ! command -v tmux &> /dev/null
 then
     echo " === tmux not found ==="
-    sudo apt install tmux
 fi
 
 # Install vim plugins
 vim +PluginInstall +qa
 
-echo "Install complete."
-
+echo "Install complete"
+echo "----------------"
+echo "  Note that YouCompleteMe [vim plugin] requires compilaton with multiple"
+echo "  dependencies (https://github.com/ycm-core/YouCompleteMe#linux-64-bit)."
