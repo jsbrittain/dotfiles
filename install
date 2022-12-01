@@ -8,9 +8,21 @@ mv ~/dotfiles ~/.dotfiles
 for f in ~/.dotfiles/.*
 do
     base=$(basename "$f")
+	# Skip certain files
     if [ "$base" == "." ] || [ "$base" == ".." ] || [ "$base" == ".git" ] || [ "$base" == ".gitignore" ]; then
         continue;
     fi
+	# Check if .file exists; make backup and remove to use linked file
+	if [[ -f "~/$base" ]]; then
+		# File may be a symlink, if so unlink...
+		if [[ -L "~/$base" ]]; then
+			unlink ~/$f
+		else
+			# ...otherwise, make copy
+			mv ~/$f ~/{$f}.orig
+		fi
+	fi
+	# Make link in home folder
     ln -s $f ~
 done
 
