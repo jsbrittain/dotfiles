@@ -28,6 +28,10 @@ set updatetime=100
 imap <F5> <Esc><F5>
 nmap <F5> :w<CR>:!clear;python %<CR>
 
+" ALE keybindings
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 " Slime keybindings, Alt-Enter for line execution
 set <A-CR>= " To type this in insert mode: <C-V><Alt-<something>> <C-V><M>
 vmap <A-CR> <Plug>SlimeRegionSend<Esc>`><Down>
