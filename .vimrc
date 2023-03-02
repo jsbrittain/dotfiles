@@ -22,8 +22,8 @@ packadd termdebug
 let g:termdebug_wide=1
 
 " ale
-let g:ale_linters = {'python': ['flake8']}
-let g:syntastic_python_flake8_args='--ignore=W503'
+let g:ale_linters = {'python': ['flake8', 'mypy']}
+let g:ale_python_flake8_options = '--ignore=E501,W503'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -51,6 +51,15 @@ nnoremap <leader>gtp :YcmCompleter GetType<CR>
 nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" A custom Python debug... insert/enable interact mode...
+nmap <leader>¬ oimport code; code.interact(local=dict(globals(), **locals()))
+
+" Swap file directory
+set directory=$HOME/.vim/swapfiles//
+
+" Ensure backspace works everywhere, not just EOL
+set backspace=indent,eol,start
 
 " Default behaviour
 syntax on
