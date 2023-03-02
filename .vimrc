@@ -23,6 +23,7 @@ let g:termdebug_wide=1
 
 " ale
 let g:ale_linters = {'python': ['flake8']}
+let g:syntastic_python_flake8_args='--ignore=W503'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
