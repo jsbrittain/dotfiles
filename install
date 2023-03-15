@@ -53,8 +53,8 @@ then
     echo " === tmux not found ==="
 fi
 
-# Install vim plugins
-vim +PluginInstall +qa
+# Install vim plugins (second argument initialises markdown-previewer)
+vim +PluginInstall +"call mkdp#util#install()" +qa
 
 echo "Install complete"
 echo "----------------"

@@ -7,12 +7,13 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'morhetz/gruvbox'           " Colorscheme
-Plugin 'dense-analysis/ale'        " Syntax checking
-Plugin 'Valloric/YouCompleteMe'    " Code completion (requires compiling)
-Plugin 'airblade/vim-gitgutter'    " Track git changes
-Plugin 'preservim/nerdtree'        " File browser
-Plugin 'jpalardy/vim-slime'        " Send commands using tmux
+Plugin 'morhetz/gruvbox'				" Colorscheme
+Plugin 'dense-analysis/ale'				" Syntax checking
+Plugin 'Valloric/YouCompleteMe'			" Code completion (requires compiling)
+Plugin 'airblade/vim-gitgutter'			" Track git changes
+Plugin 'preservim/nerdtree'				" File browser
+Plugin 'jpalardy/vim-slime'				" Send commands using tmux
+Plugin 'iamcco/markdown-preview.nvim'	" Markdown previewer
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -55,6 +56,10 @@ nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " A custom Python debug... insert/enable interact mode...
 nmap <leader>¬ oimport code; code.interact(local=dict(globals(), **locals()))
 
+" Enable highlight search (Space to turn off)
+set hlsearch
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
 " Swap file directory
 set directory=$HOME/.vim/swapfiles//
 
@@ -80,6 +85,15 @@ inoremap {<CR> {<CR>}<C-o>O
 imap - <-<Space>
 imap m %>%<Space>
 
+" Start vim in insert mode
+"autocmd BufRead,BufNewFile * start
+
+" Show filename at all times
+set laststatus=2
+
+" Toggle pasting from clipboard without successive indents
+set pastetoggle=<F3>
+
 augroup filetype_py
 autocmd FileType py setlocal
     \ tabstop=4
@@ -102,3 +116,12 @@ autocmd FileType cpp setlocal
     \ fileformat=unix
 augroup end
 
+augroup filetype_tsx
+autocmd FileType tsx,js setlocal
+    \ tabstop=2
+    \ softtabstop=2
+    \ shiftwidth=2
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
+augroup end
