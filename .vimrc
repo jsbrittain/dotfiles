@@ -117,7 +117,7 @@ autocmd FileType cpp setlocal
 augroup end
 
 augroup filetype_js
-autocmd FileType javascript,typescript setlocal
+autocmd FileType javascript,typescript,typescriptreact setlocal
     \ tabstop=2
     \ softtabstop=2
     \ shiftwidth=2
