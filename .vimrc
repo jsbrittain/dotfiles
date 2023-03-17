@@ -95,7 +95,7 @@ set laststatus=2
 set pastetoggle=<F3>
 
 augroup filetype_py
-autocmd FileType py setlocal
+autocmd FileType python setlocal
     \ tabstop=4
     \ softtabstop=4
     \ shiftwidth=4
@@ -116,8 +116,8 @@ autocmd FileType cpp setlocal
     \ fileformat=unix
 augroup end
 
-augroup filetype_tsx
-autocmd FileType tsx,js setlocal
+augroup filetype_js
+autocmd FileType javascript,typescript setlocal
     \ tabstop=2
     \ softtabstop=2
     \ shiftwidth=2
