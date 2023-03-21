@@ -76,6 +76,7 @@ set foldlevel=99
 set updatetime=100
 set tabstop=4
 set softtabstop=4
+set expandtab
 set shiftwidth=4
 set number           " also, 'set number relativenumber'
 set colorcolumn=80   " col indicator
