@@ -1,4 +1,4 @@
-if [ "$TMUX" = "" ]; then tmux new-session -A -s main; fi
+#if [ "$TMUX" = "" ]; then tmux new-session -A -s main; fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -8,7 +8,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -96,6 +96,7 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -108,39 +109,42 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim='nvim'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/jsb/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/jsb/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/jsb/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/Users/jsb/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "/Users/jsb/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/jsb/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/jsb/mambaforge/bin:$PATH"
+        export PATH="/Users/jsb/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
-
-if [ -f "/Users/jsb/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/Users/jsb/mambaforge/etc/profile.d/mamba.sh"
-fi
 # <<< conda initialize <<<
 conda deactivate
 
 create_x86_conda_environment() {
 	CONDA_SUBDIR=osx-64 conda create -n $@
 	conda activate $1
+    conda config --env --set subdir osx-64
 }
 create_ARM_conda_environment() {
 	CONDA_SUBDIR=osx-arm64 conda create -n $@
 	conda activate $1
+    conda config --env --set subdir osx-arm64
 }
 
 # To cleanup docker routinely [--force = non-interactively], run:
 # docker system prune --force
 # docker volume prune --force
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

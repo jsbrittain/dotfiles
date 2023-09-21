@@ -13,6 +13,8 @@ Plugin 'Valloric/YouCompleteMe'			" Code completion (requires compiling)
 Plugin 'airblade/vim-gitgutter'			" Track git changes
 Plugin 'preservim/nerdtree'				" File browser
 Plugin 'jpalardy/vim-slime'				" Send commands using tmux
+Plugin 'puremourning/vimspector'        " Debugger
+Plugin 'github/copilot.vim'             " Github copilot
 Plugin 'iamcco/markdown-preview.nvim'	" Markdown previewer
 
 call vundle#end()            " required
@@ -24,7 +26,7 @@ let g:termdebug_wide=1
 
 " ale
 let g:ale_linters = {'python': ['flake8', 'mypy']}
-let g:ale_python_flake8_options = '--ignore=E501,W503'
+let g:ale_python_flake8_options = '--ignore=E501,W503,E203'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -79,6 +81,7 @@ set softtabstop=4
 set expandtab
 set shiftwidth=4
 set number           " also, 'set number relativenumber'
+" set number relativenumber
 set colorcolumn=80   " col indicator
 " Autocomplete closing brackets
 inoremap {<CR> {<CR>}<C-o>O
@@ -89,8 +92,8 @@ imap m %>%<Space>
 " Start vim in insert mode
 "autocmd BufRead,BufNewFile * start
 
-" Show filename at all times
-set laststatus=2
+set laststatus=2  " Show filename at all times
+set shortmess-=S  " Show search count in status bar
 
 " Toggle pasting from clipboard without successive indents
 set pastetoggle=<F3>
@@ -100,10 +103,10 @@ autocmd FileType python setlocal
     \ tabstop=4
     \ softtabstop=4
     \ shiftwidth=4
-    \ textwidth=79
     \ expandtab
     \ autoindent
     \ fileformat=unix
+"    \ textwidth=79  " automatic line wrapping
 augroup end
 
 augroup filetype_cpp
@@ -111,7 +114,6 @@ autocmd FileType cpp setlocal
     \ tabstop=2
     \ softtabstop=2
     \ shiftwidth=2
-    \ textwidth=79
     \ expandtab
     \ autoindent
     \ fileformat=unix
