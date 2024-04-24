@@ -1,5 +1,11 @@
 #if [ "$TMUX" = "" ]; then tmux new-session -A -s main; fi
 
+# To cleanup docker routinely [--force = non-interactively], run:
+#echo "Cleaning up docker..."
+#docker system prune --force
+#docker volume prune --force
+#echo "Done cleaning up docker."
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -127,6 +133,10 @@ else
     fi
 fi
 unset __conda_setup
+
+if [ -f "/Users/jsb/miniconda3/etc/profile.d/mamba.sh" ]; then
+    . "/Users/jsb/miniconda3/etc/profile.d/mamba.sh"
+fi
 # <<< conda initialize <<<
 conda deactivate
 
@@ -141,10 +151,10 @@ create_ARM_conda_environment() {
     conda config --env --set subdir osx-arm64
 }
 
-# To cleanup docker routinely [--force = non-interactively], run:
-# docker system prune --force
-# docker volume prune --force
-
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+export PATH="/Users/jsb/repos/llvm/llvm-project/build/bin:$PATH"

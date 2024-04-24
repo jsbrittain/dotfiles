@@ -37,5 +37,7 @@ packer.startup(function()
   use { 'preservim/nerdtree' }				         -- File browser
   use { 'jpalardy/vim-slime' }				         -- Send commands using tmux
   use { 'iamcco/markdown-preview.nvim' }	         -- Markdown previewer
+  use { 'snakemake/snakemake', rtp='misc/vim', ft='snakemake' }  -- Snakemake syntax
+  use { 'christoomey/vim-tmux-navigator' }	         -- Navigate between tmux and vim
   end
 )

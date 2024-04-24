@@ -30,6 +30,8 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.cmd [[set updatetime=100]]
 vim.opt.signcolumn = "yes"
 
+vim.cmd [[let g:ale_python_flake8_options = '--ignore=W503,E203 --max-line-length=88']]
+
 vim.cmd [[set tabstop=4]]
 vim.cmd [[set softtabstop=4]]
 vim.cmd [[set expandtab]]
@@ -44,7 +46,7 @@ autocmd FileType python setlocal
     \ expandtab
     \ autoindent
     \ fileformat=unix
-"    \ textwidth=79  " automatic line wrapping
+"    \ textwidth=88  " automatic line wrapping
 augroup end]]
 
 vim.cmd [[augroup filetype_cpp]]
@@ -90,6 +92,14 @@ vim.cmd [[set pastetoggle=<F3>]]
 -- Mouse scroll wheel moves cursor (instead of screen)
 vim.cmd [[map <ScrollWheelUp> k]]
 vim.cmd [[map <ScrollWheelDown> j]]
+vim.cmd [[imap <ScrollWheelUp> <Up>]]
+vim.cmd [[imap <ScrollWheelDown> <Down>]]
 
 -- coc: autocomplete suggestion with Enter
 vim.cmd [[inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]]
+
+vim.cmd [[set conceallevel=0]]
+
+vim.cmd [[set nofoldenable]]
+
+vim.cmd [[let g:ale_linters = {'python': ['flake8'], 'c++': ['clang'], 'javascript': ['eslint']}]]
