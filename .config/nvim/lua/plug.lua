@@ -39,5 +39,6 @@ packer.startup(function()
   use { 'iamcco/markdown-preview.nvim' }	         -- Markdown previewer
   use { 'snakemake/snakemake', rtp='misc/vim', ft='snakemake' }  -- Snakemake syntax
   use { 'christoomey/vim-tmux-navigator' }	         -- Navigate between tmux and vim
+  use { 'preservim/tagbar' }                         -- Code structure (tagbar)
   end
 )
